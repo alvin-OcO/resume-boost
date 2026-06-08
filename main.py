@@ -1,12 +1,10 @@
 # main.py - 简历优化器主入口
 
-# 导入你写的两个模块
 from pdf_parser import extract_text
 from analyzer import analyze_resume
 
 
 def main():
-    # 流程：
     # 1. 定义 PDF 路径和目标岗位
     pdf_path = "resume.pdf"
     target_job = "软件工程师"

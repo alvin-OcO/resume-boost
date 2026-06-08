@@ -8,7 +8,6 @@ def extract_text(pdf_path: str) -> str:
     Returns:
         提取出的纯文本字符串
     """
-    # 提示：
     # 1. fitz.open(pdf_path)
     doc = fitz.open(pdf_path)
     # 2. 遍历所有页面（doc 可以用 for 循环迭代）
