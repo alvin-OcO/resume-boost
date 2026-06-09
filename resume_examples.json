@@ -1,0 +1,103 @@
+[
+  {
+    "id": "resume_rag_1",
+    "category": "知识库系统",
+    "text": "企业级 RAG 知识库系统 ｜ LangChain + Milvus + Qwen-14B\n- 背景：解决公司内部文档分散、客服问答效率低的问题，构建统一智能问答平台。\n- 任务：负责 RAG 全链路架构设计与实现，包括文档解析、向量化存储、检索增强生成。\n- 行动：设计分块策略（递归字符+语义分块），集成 Milvus 向量数据库，采用 Qwen-14B 作为生成模型，实现 Hybrid Search（BM25 + 向量检索），并开发缓存与重排序模块优化响应质量。\n- 结果：上线后问答准确率达 92%，平均响应时间从 5 秒降至 1.8 秒，日均处理 3000+ 用户问题。\n- 技术亮点：自实现动态滑动窗口上下文压缩，解决长文档信息丢失问题；利用 vLLM 部署推理服务，吞吐量提升 3 倍。"
+  },
+  {
+    "id": "resume_agent_1",
+    "category": "AI开发",
+    "text": "多模态智能客服 Agent ｜ LangGraph + GPT-4 + 工具调用\n- 背景：传统客服机器人无法处理查询订单、退换货、价格比对等多步骤复杂任务。\n- 任务：设计并实现具备规划、记忆、工具调用能力的 Agent 框架，覆盖售前到售后全流程。\n- 行动：基于 LangGraph 构建状态机 Agent，集成订单查询 API、物流追踪接口、知识库查询工具，实现 ReAct 推理循环；设计短期记忆（滑动窗口）与长期记忆（Redis 向量存储）结合的记忆模块；通过 Few-shot Prompting 和结构化输出解析，确保调用成功率。\n- 结果：复杂任务自动完成率从 34% 提升至 76%，平均交互轮次减少 40%，用户满意度上升 25%。\n- 技术亮点：实现子任务动态分解与并行调用，最大可同时调用 5 个工具；建立 Agent 行为追踪与成本监控看板。"
+  },
+  {
+    "id": "resume_finetune_1",
+    "category": "AI开发",
+    "text": "代码生成模型微调（LLaMA 3-8B）｜ LoRA + QLoRA + DeepSpeed\n- 背景：通用模型在内部代码库（Java + Python）上的生成准确率不足 60%，不符合业务要求。\n- 任务：利用公司私有代码数据对开源模型进行微调，提升代码补全与注释生成的准确性。\n- 行动：清洗 200k 条内部代码片段，构造指令-输出对数据集；采用 QLoRA（4-bit 量化）在 4 张 A100 上进行微调，用 DeepSpeed ZeRO-3 优化显存；训练中对比不同 rank（32/64）和 target_modules，选择最优超参；部署使用 vLLM + 动态批处理。\n- 结果：模型在测试集上 EM（精确匹配）从 58% 提升到 83%，推理延迟降低 35%。\n- 技术亮点：实现数据难例挖掘（hard negative mining）提升边界情况处理能力；微调后模型大小仅增加 2%，便于分发。"
+  },
+  {
+    "id": "resume_backend_high_perf",
+    "category": "后端开发",
+    "text": "秒杀系统高并发改造 ｜ Java + Redis + RocketMQ\n- 背景：大促活动下原订单接口 QPS 峰值仅 2000，导致系统雪崩，用户下单失败率高。\n- 任务：设计高可用秒杀方案，将 QPS 提升至 10000+ 并保证数据一致性。\n- 行动：采用“本地标识 + Redis 预扣库存 + RocketMQ 异步落库”架构；基于 Lua 脚本原子化扣减库存，使用令牌桶限流；MQ 消费端配置死信队列与重试机制保证最终一致性；数据库层面分库分表，读写分离。\n- 结果：压测 QPS 达到 15000，99 线延迟 < 200ms，库存扣减零超卖，系统平稳支撑双十一。\n- 技术亮点：自研热点商品探测与动态缓存刷新，避免缓存击穿；使用 CompletableFuture 并行调用依赖服务，响应时间降低 40%。"
+  },
+  {
+    "id": "resume_backend_api",
+    "category": "后端开发",
+    "text": "开放 API 网关与开发者平台 ｜ Go + APISIX + OAuth2\n- 背景：企业需要对外提供统一 API 服务，原有方案缺乏认证、限流、监控能力。\n- 任务：搭建可扩展的 API 网关与开发者门户，完成从申请密钥到调用鉴权的闭环。\n- 行动：基于 APISIX 进行二次开发，定制 JWT 认证插件与参数转换插件；使用 Go 编写控制面服务，管理租户、路由和应用配额；集成 Prometheus + Grafana 实现请求/限流/错误率监控；开发者平台提供调试工具与 SDK 生成器。\n- 结果：接入内部 15+ 业务线，日均调用量 800 万次，接口平均耗时降低 30%，开发者接入效率提升 70%。\n- 技术亮点：实现基于滑动窗口的全局限流与租户级限流联控；设计插件热加载机制，发布无重启。"
+  },
+  {
+    "id": "resume_skills_java",
+    "category": "专业技能",
+    "text": "【专业技能】\n- 编程语言：精通 Java，深入理解 JVM 内存模型、GC 调优（G1/ZGC），具备 JIT 优化分析经验；熟悉 Go 协程模型与并发原语，用于高并发中间件开发。\n- 框架与生态：掌握 Spring Cloud / Dubbo 微服务体系，阅读过 Spring 事务、Nacos 服务发现核心源码；熟练使用 Netty 进行网络编程，实现自定义协议栈。\n- 数据库与中间件：MySQL 事务隔离级别、索引优化（B+Tree/哈希）、分库分表实战（ShardingSphere）；Redis 数据结构底层实现（跳表、压缩列表），熟练使用 Redisson 分布式锁并理解其续期机制；RocketMQ/Kafka 消息可靠性与顺序消费实现。\n- 云原生与工具：Docker + K8s（Helm 部署），Jenkins Pipeline 流水线，Prometheus + Grafana 可观测性建设。"
+  },
+  {
+    "id": "resume_skills_ai",
+    "category": "专业技能",
+    "text": "【专业技能】\n- 大语言模型：熟悉 Transformer 架构（GPT/LLaMA/Qwen），具备 LoRA/QLoRA/全参微调实践经验，熟练使用 DeepSpeed、Megatron 进行分布式训练；掌握常用量化方法（GPTQ/AWQ），推理加速使用 vLLM/TGI。\n- Agent 与 RAG：精通 LangChain、LangGraph、LlamaIndex 框架，实现 ReAct、Self-Ask 等多 Agent 协作；熟悉 RAG 全流程，包括文档解析（Unstructured）、分块策略、向量检索（Milvus/FAISS）、重排序（Cohere/Cross-Encoder）。\n- 深度学习与工具：PyTorch/TensorFlow 建模，HuggingFace transformers 生态；模型评估指标（BLEU/ROUGE/EM/Hits@N），实验追踪使用 MLflow/Weights & Biases。"
+  },
+  {
+    "id": "resume_self_eval_1",
+    "category": "自我评价",             
+    "text": "【自我评价】\n- 结果驱动：习惯先定义可衡量的业务指标，再拆解技术任务；曾主导项目使系统吞吐量提升 200%，且将线上故障率降低 50%。\n- 深度钻研：对技术原理保持好奇，阅读过 Spring、Redis、RocketMQ 核心源码，善于在团队内组织技术分享与代码审查。\n- 工程化意识：重视可观测性、容错与扩展性，主动补充单元测试、压测与监控，推动 DDD 与整洁架构在项目中的落地。\n- 快速学习：每季度跟进 1~2 项前沿技术（如 WebAssembly、eBPF），并能快速落地 Demo 验证可行性。"
+  },
+  {
+    "id": "resume_self_eval_2",
+    "category": "自我评价",
+    "text": "【自我评价】\n- 业务理解力：善于深入业务场景，曾从零搭建客服 Agent，准确识别“多轮对话状态管理”“工具调用容错”等关键难点，设计的产品方案被 3 个 BU 复用。\n- 协作与影响力：跨部门推动标准化 API 网关建设，制定开发规范并撰写内部文档 10+ 篇，帮助 5 个后端团队降低接入成本。\n- 持续改进：保持对 AI 工程化（MLOps/LLMOps）的实践热情，在团队中引入 Prompt 版本管理和测试框架，减少模型迭代回归问题。\n- 抗压能力：善于在紧急故障中保持冷静，多次主导线上疑难问题排查（内存泄漏、死锁、CPU 飙升），输出 5 份根因分析报告并沉淀为可预防机制。"
+  },
+  {
+    "id": "resume_ai_app_rag_detail",
+    "category": "知识库系统",
+    "text": "法律文档智能审查 RAG 系统 ｜ LlamaIndex + Pinecone + Claude 3\n- 背景：律师事务所积累的海量合同与判决书未有效利用，律师审查一份合同平均耗时 3 小时。\n- 任务：构建面向法律场景的 RAG 系统，实现条款风险提示与类案推荐。\n- 行动：首先对 PDF/Word 文档进行版面分析与 OCR 识别，使用法律领域微调的 embedding 模型（Law2Vec）做向量化存储；检索时增加日期权重和引用次数过滤；生成阶段采用 Claude 3 Haiku + 法律提示模板，输出包含条款原文、风险等级、修改建议的结构化结果。\n- 结果：律师审查时间缩短至 45 分钟，系统在 200 份测试合同上的风险识别召回率达 91%。\n- 技术亮点：针对长合同（>100 页）设计滑动窗口检索，避免上下文截断；自建 case law 引用网络，支持点击溯源。"
+  },
+  {
+    "id": "resume_agent_multimodal",
+    "category": "AI开发",
+    "text": "供应链自动化 Agent 系统 ｜ AutoGen + 自定义工具链\n- 背景：供应商询价、订单创建、物流跟踪等环节依赖人工操作，响应慢且易出错。\n- 任务：设计多 Agent 协同系统，实现询价、比价、下单、异常处理的全自动化。\n- 行动：基于 Microsoft AutoGen 框架，设计采购 Agent、比价 Agent、订单 Agent 与人工审批 Agent；Agent 间通过异步消息通信，使用 Redis Stream 做消息持久化；采购 Agent 调用 ERP 库存接口，比价 Agent 爬取供应商 API，订单 Agent 调用企业内部订单服务；引入人工 fallback 机制应对不可处理异常。\n- 结果：处理一个完整采购流程从平均 45 分钟降至 4 分钟，人工介入减少 80%，准确率 97%。\n- 技术亮点：设计 Agent 状态机与重试策略，保证长时间任务的可恢复性；实现 Agent 行为可观测（OpenTelemetry + Jaeger）。"
+  },
+  {
+    "id": "resume_backend_microservice",
+    "category": "后端开发",
+    "text": "亿级用户账户中心重构 ｜ Go + gRPC + DDD\n- 背景：旧单体账户服务性能瓶颈明显，新功能上线周期长，且跨服务数据一致性难保证。\n- 任务：按领域驱动设计拆分账户、权限、风控三个微服务，并设计统一访问层。\n- 行动：使用 Go 重写核心服务，采用 gRPC 进行内部通信，使用 etcd 作服务发现；对外提供 HTTP Gateway（grpc-gateway）；引入 Saga 分布式事务模式处理跨服务（注册即赠送积分）场景；设计幂等性方案（唯一请求 ID + Redis 去重）。\n- 结果：单服务可承载 5 万 QPS，上线周期从 2 周缩短至 3 天，数据最终一致性达到 99.99%。\n- 技术亮点：实现全链路超时控制与熔断降级（gRPC 拦截器 + Sentinel），并发场景下性能提升 150%。"
+  },
+  {
+    "id": "resume_skills_devops",
+    "category": "专业技能",
+    "text": "【专业技能】\n- 容器与编排：熟练编写 Dockerfile（多阶段构建瘦身镜像），K8s 资源管理（Pod/Deployment/Service/Ingress/ConfigMap/Secret），使用 Helm 管理应用版本；了解 Operator 模式，曾基于 KubeBuilder 开发 Controller 实现数据库自动备份。\n- CI/CD：Jenkins Pipeline + Groovy 脚本编写，GitLab CI 自动化测试与部署，ArgoCD 实现 GitOps 持续发布。\n- 可观测性：Prometheus 指标采集 + AlertManager 告警，Grafana 仪表盘定制；日志系统 EFK（Elasticsearch + Fluentd + Kibana）；分布式追踪（Jaeger，OpenTelemetry）。\n- 基础设施即代码：Terraform 管理云资源（AWS/阿里云），Ansible 进行配置管理。"
+  },
+  {
+    "id": "resume_llm_serving",
+    "category": "专业技能",
+    "text": "高并发 LLM 推理服务建设 ｜ vLLM + Triton + Kafka\n- 背景：公司内部多个业务（客服、搜索、内容生成）都需要调用大模型，但单实例并发低且资源浪费。\n- 任务：构建统一推理网关，支持多模型多租户，提升吞吐并降低延迟。\n- 行动：采用 vLLM 作为核心推理引擎，利用 PagedAttention 显存优化；部署多个模型副本（Qwen-7B、CodeLlama-7B），通过 Nvidia Triton Inference Server 进行模型管理与动态批处理；网关层集成 Kafka 实现异步请求队列，客户端可通过 WebSocket 接收流式结果。设计基于模型复杂度与队列长度的自适应负载均衡。\n- 结果：整体吞吐量提升 5 倍（从 30 req/s 到 180 req/s），P99 延迟由 6s 降至 1.2s，GPU 利用率从 35% 升至 75%。\n- 技术亮点：实现 Prompt 缓存与 Token 级复用，同请求前缀场景下加速 2 倍；自研平滑滚动更新模型版本机制，不中断服务。"
+  },
+  {
+    "id": "resume_nlp_cv_hybrid",
+    "category": "专业技能",
+    "text": "多模态文档信息抽取系统 ｜ LayoutLMv3 + PaddleOCR + PyTorch\n- 背景：公司大量合同、发票、报表为扫描件，人工录入关键字段（金额、日期、合同编号）效率低下且易错。\n- 任务：开发端到端的信息抽取管道，支持 OCR + 布局分析 + 语义抽取。\n- 行动：使用 PaddleOCR 进行文字检测与识别，提取坐标信息；采用 LayoutLMv3 预训练模型进行序列标注（SER），识别关键实体及关系；后处理阶段利用正则与规则引擎对抽取结果校验；针对低质量图像（模糊、倾斜）做图像预处理增强。\n- 结果：关键字段抽取 F1 值达到 94%，处理单页文档耗时 < 0.8 秒，替代 80% 的人工录入工作，节省每年 2000 人天。\n- 技术亮点：训练数据不足时使用弱监督（Snorkel）生成伪标签；模型输出提供置信度分数，低于阈值时转人工审核。"
+  },
+  {
+    "id": "resume_fresh_rag",
+    "category": "AI开发",
+    "text": "课程设计：论文检索问答助手 ｜ LangChain + Chroma + ChatGLM3-6B\n- 背景：科研场景下从大量PDF论文中查找特定信息耗时，需要一个轻量级问答工具辅助文献阅读。\n- 任务：独立设计并实现检索增强生成（RAG）系统，支持论文上传、解析和自然语言问答。\n- 行动：使用PyPDF2解析论文文本，按章节做固定长度切块；选用Chroma作为本地向量数据库，用HuggingFace的`BAAI/bge-small-zh`模型生成嵌入；检索Top-3相关块后，调用ChatGLM3-6B（本地4-bit量化）生成答案；用Gradio快速搭建Web演示界面。\n- 结果：系统能在5秒内响应问题，对20篇计算机领域论文的常见问题回答准确率约78%，完成课程项目答辩并获得优秀。\n- 技术亮点：实现了基于滑动窗口的上下文重叠分块策略，减少跨块信息丢失；文档索引全过程封装为离线Pipeline，支持增量更新。"
+  },
+  {
+    "id": "resume_fresh_agent",
+    "category": "AI开发",
+    "text": "实习项目：内部工单处理助手（简化Agent） ｜ LangChain + OpenAI API + Flask\n- 背景：实习期间发现客服团队需手动将Jira工单分类并指派，重复劳动多。\n- 任务：开发一个对话式助手，能理解用户意图并自动调用Jira API完成创建工单、查询状态。\n- 行动：基于LangChain的`create_react_agent`搭建Agent，定义3个工具（创建工单、查询工单、列出项目）；设计提示词约束模型输出JSON格式参数；后端用Flask提供API，前端为简单Web页面；使用Redis缓存用户会话历史。\n- 结果：助手准确识别90%以上的操作意图，将平均工单创建时间从2分钟降至30秒，部署到部门内部试用获得好评。\n- 技术亮点：通过增加Few-shot示例处理边缘case，对工具调用失败实现自动重试和友好回复。"
+  },
+  {
+    "id": "resume_fresh_backend",
+    "category": "后端开发",
+    "text": "校园二手交易平台（毕业设计）｜ Spring Boot + MyBatis-Plus + MySQL + Redis\n- 背景：校园内缺少便捷的二手物品交易渠道，学生在微信群发布信息容易沉没。\n- 任务：开发一个支持商品发布、搜索、私信聊天的Web应用。\n- 行动：采用Spring Boot构建RESTful API，使用JWT做登录认证；商品搜索基于MySQL全文索引（ngram）；使用Redis存储热点商品浏览量与用户会话；WebSocket实现即时聊天；前端使用Vue3 + Element Plus完成简单页面。部署于腾讯云轻量服务器。\n- 结果：项目上线后累计注册用户300+，发布商品500余件，日活峰值80人；毕业设计被评为优秀。\n- 技术亮点：设计了基于布隆过滤器的商品推荐防重复曝光，优化数据库索引使搜索响应低于200ms。"
+  },
+  {
+    "id": "resume_fresh_nlp",
+    "category": "NLP开发",
+    "text": "文本情感分析（竞赛项目）｜ PyTorch + BERT + Weights & Biases\n- 背景：参加“中文商品评论情感分类”竞赛（数据集约2万条），需要对评论进行三分类（正向/中性/负向）。\n- 任务：负责模型选型、训练与调优，目标F1值达到0.85以上。\n- 行动：使用HuggingFace的`bert-base-chinese`预训练模型；基于PyTorch微调，采用动态学习率（线性 warmup + 衰减）；处理类别不平衡（负样本较少）时使用了加权损失函数；实验记录使用Weights & Biases，进行了超参搜索（batch size、学习率、epoch）。\n- 结果：在验证集上F1达到0.88，测试集排名第12/87，超越基线模型约10个百分点。\n- 技术亮点：实现了数据增强（随机mask、同义词替换），增强了模型鲁棒性；将模型转换为ONNX格式，推理速度提升2倍。"
+  },
+  {
+    "id": "resume_fresh_cv",
+    "category": "CV开发",
+    "text": "口罩佩戴检测（课程项目）｜ YOLOv5 + OpenCV + PyTorch\n- 背景：疫情期间，课程要求实现一个可实时检测人员是否佩戴口罩的系统。\n- 任务：收集并标注数据集，训练目标检测模型，并部署到摄像头画面。\n- 行动：从互联网收集并清洗8000张人脸图片，使用LabelImg标注“戴口罩”“未戴口罩”“不正确佩戴”三类；基于YOLOv5s模型进行迁移学习，训练100个epoch，采用Mosaic数据增强；模型导出为TorchScript，用OpenCV调用摄像头做实时推理，检测框上显示置信度。\n- 结果：模型在自建测试集上mAP达到92%，实时推理速度约35 FPS（GTX 1650）。课程获A等评级。\n- 技术亮点：针对小目标（远处人脸）调整anchor尺寸；使用TensorRT尝试轻量化，推理速度提升至55 FPS，写入实验报告。"
+  }
+
+]
