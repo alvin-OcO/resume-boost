@@ -1,18 +1,18 @@
 """rewriter.py - 智能简历改写模块（Phase 5）
 
-流程：原始简历 + 匹配JD + 优秀范例 → LLM → 优化后的简历文本
+职责：结合 JD 匹配 + 范例参考 + LLM 生成，输出优化后的简历。
+流程：原始简历 + 匹配 JD + 优秀范例 → LLM → 优化后的简历文本
 """
 import json
-import os
 from pathlib import Path
 
 import chromadb
-from dotenv import load_dotenv
-from openai import OpenAI
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
+
+from config import get_llm_client, DEEPSEEK_MODEL
 from jd_store import search_jds
 
-load_dotenv()
+__all__ = ["rewrite_resume"]
 
 # ─── 范例库（独立的 ChromaDB collection） ───
 _example_client = chromadb.Client()
@@ -140,19 +140,18 @@ def rewrite_resume(resume_text: str, target_job: str) -> str:
 请根据以上信息，重写优化后的简历。"""
 
     # 4. 调用 LLM
-    client = OpenAI(
-        api_key=os.getenv("DEEPSEEK_API_KEY"),
-        base_url="https://api.deepseek.com",
-    )
+    client = get_llm_client()
 
-    response = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[
-            {"role": "system", "content": REWRITE_SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=0.7,  # 稍高温度，让改写更有创意
-        max_tokens=4000,  # 简历不会太长，4000 token 足够
-    )
-
-    return response.choices[0].message.content
+    try:
+        response = client.chat.completions.create(
+            model=DEEPSEEK_MODEL,
+            messages=[
+                {"role": "system", "content": REWRITE_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.7,  # 稍高温度，让改写更有创意
+            max_tokens=4000,  # 简历不会太长，4000 token 足够
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        raise RuntimeError(f"LLM 改写调用失败: {e}") from e

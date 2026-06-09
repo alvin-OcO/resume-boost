@@ -13,6 +13,8 @@
 import re
 import difflib
 
+__all__ = ["generate_diff_html", "save_diff_report"]
+
 
 def _strip_markdown(text: str) -> str:
     """

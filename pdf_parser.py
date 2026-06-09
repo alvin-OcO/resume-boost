@@ -1,5 +1,11 @@
-"""pdf_parser.py - PDF 文本提取模块"""
+"""pdf_parser.py - PDF 文本提取模块
+
+职责：从简历 PDF 中提取纯文本内容。
+依赖：PyMuPDF (pymupdf) >= 1.24
+"""
 import pymupdf as fitz  # PyMuPDF >= 1.24 需要用 pymupdf 导入
+
+__all__ = ["extract_text"]
 
 
 def extract_text(pdf_path: str) -> str:

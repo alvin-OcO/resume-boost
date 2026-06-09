@@ -1,20 +1,27 @@
-"""jd_store.py - JD 知识库（混合检索 + Cross-Encoder 重排序）"""
+"""jd_store.py - JD 知识库（混合检索 + Cross-Encoder 重排序）
+
+职责：管理岗位 JD 数据库，提供语义检索 + 关键词检索 + 融合排序 + 精排的完整检索 Pipeline。
+"""
+from typing import Optional
+
 import jieba
 import chromadb
 from rank_bm25 import BM25Okapi
 from sentence_transformers import CrossEncoder
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 
+__all__ = ["load_jds", "search_jds"]
+
 # ─── 全局状态 ───
 client = chromadb.Client()
 embedding_fn = SentenceTransformerEmbeddingFunction(model_name="BAAI/bge-small-zh-v1.5")
 
 # BM25 索引（模块级变量，load_jds 时构建）
-_bm25_index: BM25Okapi | None = None
+_bm25_index: Optional[BM25Okapi] = None
 _jd_texts: list[str] = []  # 保存原始文本，用于按索引取回结果
 
 # Cross-Encoder 重排序模型（懒加载，首次调用时初始化）
-_reranker: CrossEncoder | None = None
+_reranker: Optional[CrossEncoder] = None
 _RERANKER_MODEL = "BAAI/bge-reranker-v2-m3"
 
 

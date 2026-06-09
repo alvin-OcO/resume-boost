@@ -21,6 +21,8 @@ from pathlib import Path
 
 from fpdf import FPDF
 
+__all__ = ["save_pdf"]
+
 
 # ─── 字体路径（Windows 系统字体） ───
 # Windows 自带微软雅黑，路径固定在 C:\Windows\Fonts\
