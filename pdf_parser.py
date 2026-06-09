@@ -1,5 +1,5 @@
 """pdf_parser.py - PDF 文本提取模块"""
-import fitz
+import pymupdf as fitz  # PyMuPDF >= 1.24 需要用 pymupdf 导入
 
 
 def extract_text(pdf_path: str) -> str:
